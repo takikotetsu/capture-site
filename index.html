@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="ja">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>.Capture</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=IBM+Plex+Sans+JP:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  /* .Capture LP — 単一ダークテーマ(放送・現場機材の世界観に合わせて意図的に固定) */
+  :root {
+    --bg: #0c0b09;
+    --panel: #161310;
+    --panel2: #1d1915;
+    --line: #2b241c;
+    --text: #ede6da;
+    --sub: #a2957f;
+    --accent: #ed7d1c;
+    --accent-dim: #b85e12;
+    --rec: #e5352b;
+    color-scheme: dark;
+  }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: "IBM Plex Sans JP", "Hiragino Sans", sans-serif;
+    font-size: 16px;
+    line-height: 1.85;
+  }
+  .wrap { max-width: 1060px; margin: 0 auto; padding-inline: 24px; }
+  a { color: var(--accent); text-decoration: none; }
+  ::selection { background: var(--accent); color: #140b03; }
+
+  .en { font-family: Archivo, "IBM Plex Sans JP", sans-serif; }
+  .mono { font-family: "IBM Plex Mono", monospace; }
+
+  /* ---- ヘッダー ---- */
+  header {
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    padding-block: 22px;
+  }
+  .brand { display: flex; align-items: center; gap: 12px; }
+  .chip {
+    width: 40px; height: 40px; border-radius: 22.5%;
+    background: linear-gradient(160deg, #f28c2e, #d96a0e);
+    display: grid; place-items: center;
+    color: #fff; font-family: Archivo, sans-serif; font-weight: 800; font-size: 14px;
+    letter-spacing: -0.02em;
+  }
+  .brand b { font-family: Archivo, sans-serif; font-weight: 700; font-size: 19px; letter-spacing: 0.01em; }
+  nav { display: flex; gap: 22px; align-items: center; font-size: 14px; }
+  nav a { color: var(--sub); }
+  nav a:hover { color: var(--text); }
+  .btn {
+    display: inline-block; padding: 10px 22px; border-radius: 8px;
+    font-weight: 700; font-size: 15px; line-height: 1.6;
+    border: 1px solid var(--line); color: var(--text);
+  }
+  .btn:hover { border-color: var(--sub); }
+  .btn.primary {
+    background: var(--accent); border-color: var(--accent); color: #170c02;
+  }
+  .btn.primary:hover { background: #f68f31; }
+
+  /* ---- ヒーロー ---- */
+  .hero {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center;
+    padding-block: 56px 72px;
+  }
+  .hero h1 {
+    font-size: clamp(30px, 4.2vw, 44px); line-height: 1.35; margin: 0 0 18px;
+    font-weight: 700; letter-spacing: 0.01em; text-wrap: balance;
+  }
+  .hero h1 .en { color: var(--accent); }
+  .hero p.lead { color: var(--sub); margin: 0 0 30px; font-size: 16.5px; max-width: 34em; }
+  .cta { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
+  .cta .note { width: 100%; color: var(--sub); font-size: 13px; margin-top: 2px; }
+
+  /* ---- モニタ・モックアップ ---- */
+  .monitor {
+    background: #000; border: 1px solid var(--line); border-radius: 10px;
+    padding: 10px; box-shadow: 0 30px 80px rgba(0,0,0,0.55);
+  }
+  .screen {
+    /* Cam_OSD 素材(3248×1928)の比率のまま、OSD の外枠まで見せる */
+    aspect-ratio: 3248 / 1928; max-width: 100%; border-radius: 4px; position: relative; overflow: hidden;
+    background: #000;
+  }
+  .screen img.cam {
+    position: absolute; inset: 0; width: 100%; height: 100%; display: block;
+    opacity: 0; transition: opacity 1.1s ease;
+  }
+  .screen img.cam.on { opacity: 1; }
+  .monitor .bar .rec-dot {
+    display: inline-block; width: 8px; height: 8px; border-radius: 50%;
+    background: var(--rec); margin-right: 6px; vertical-align: 1px;
+    animation: blink 1s steps(1) infinite;
+  }
+  @keyframes blink { 50% { opacity: 0.15; } }
+  @media (prefers-reduced-motion: reduce) { .monitor .bar .rec-dot { animation: none; } }
+  .monitor .bar {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 9px 6px 2px; font-family: "IBM Plex Mono", monospace; font-size: 11px; color: var(--sub);
+  }
+  .monitor .bar .rec-tag { color: var(--rec); font-weight: 500; }
+
+  /* ---- セクション共通 ---- */
+  section { border-top: 1px solid var(--line); padding-block: 64px; }
+  .eyebrow {
+    font-family: "IBM Plex Mono", monospace; font-size: 12.5px; letter-spacing: 0.14em;
+    color: var(--accent); text-transform: uppercase; margin: 0 0 10px;
+  }
+  h2 { font-size: clamp(23px, 3vw, 30px); line-height: 1.45; margin: 0 0 14px; font-weight: 700; text-wrap: balance; }
+  .sec-lead { color: var(--sub); max-width: 40em; margin: 0 0 36px; }
+
+  .feat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .feat {
+    background: var(--panel); border: 1px solid var(--line); border-radius: 10px;
+    padding: 22px 22px 18px;
+  }
+  .feat .mono-tag { font-family: "IBM Plex Mono", monospace; font-size: 12px; color: var(--accent); display: block; margin-bottom: 10px; }
+  .feat h3 { margin: 0 0 8px; font-size: 17px; font-weight: 700; }
+  .feat p { margin: 0; color: var(--sub); font-size: 14px; line-height: 1.8; }
+
+  .rows { display: grid; gap: 0; }
+  .row {
+    display: grid; grid-template-columns: 220px 1fr; gap: 24px;
+    padding-block: 20px; border-top: 1px solid var(--line);
+  }
+  .row:first-child { border-top: none; }
+  .row dt { font-weight: 700; font-size: 15.5px; }
+  .row dd { margin: 0; color: var(--sub); font-size: 14.5px; }
+  .row dd .mono { color: var(--text); font-size: 13px; }
+
+  /* ---- 価格 ---- */
+  .price-card {
+    display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: center;
+    background: linear-gradient(150deg, var(--panel2), var(--panel));
+    border: 1px solid var(--line); border-radius: 12px; padding: 34px 36px;
+  }
+  .price-card .amount { font-family: Archivo, sans-serif; font-weight: 800; font-size: 44px; line-height: 1.2; }
+  .price-card .amount small { font-size: 16px; font-weight: 500; color: var(--sub); margin-left: 8px; }
+  .price-card ul { margin: 14px 0 0; padding: 0; list-style: none; color: var(--sub); font-size: 14px; display: grid; gap: 4px; }
+  .price-card ul li::before { content: "— "; color: var(--accent); }
+  .price-actions { display: grid; gap: 10px; justify-items: stretch; text-align: center; }
+
+  footer {
+    border-top: 1px solid var(--line); padding-block: 34px 46px;
+    display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+    color: var(--sub); font-size: 13px;
+  }
+  footer a { color: var(--sub); }
+  footer a:hover { color: var(--text); }
+
+  @media (max-width: 800px) {
+    .hero { grid-template-columns: 1fr; gap: 36px; padding-block: 32px 52px; }
+    .feat-grid { grid-template-columns: 1fr; }
+    .row { grid-template-columns: 1fr; gap: 4px; padding-block: 16px; }
+    .price-card { grid-template-columns: 1fr; }
+    nav .hide-sp { display: none; }
+  }
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="brand"><span class="chip">.Cap</span><b>.Capture</b></div>
+    <nav>
+      <a class="hide-sp" href="#autorec">Auto Rec</a>
+      <a class="hide-sp" href="#premiere">Premiere</a>
+      <a class="hide-sp" href="#spec">仕様</a>
+      <a class="btn primary" href="https://buy.polar.sh/polar_cl_YwmYX35zmzHUlACti9v7CDBJ6J4Dld9Oo8G0d4Nv9wT">購入 — ¥2,980</a>
+    </nav>
+  </header>
+
+  <div class="hero">
+    <div>
+      <h1>カメラが回れば、<br><span class="en">.Capture</span> も回る。</h1>
+      <p class="lead">SDI キャプチャ&インジェストを、現場の速度で。REC フラグ追従・画面上の REC 表示の視覚検知・無線トリガーの三段構えで収録を自動化し、テイクはそのまま Premiere Pro のビンへ。Media Express の置き換えとして設計した、現場編集のための macOS アプリです。</p>
+      <div class="cta">
+        <a class="btn primary" href="https://buy.polar.sh/polar_cl_YwmYX35zmzHUlACti9v7CDBJ6J4Dld9Oo8G0d4Nv9wT">ライセンスを購入</a>
+        <a class="btn" href="https://github.com/takikotetsu/cap-releases/releases/latest">DMG をダウンロード</a>
+        <span class="note">macOS 14 以降 / Apple Silicon。公証済み・買い切り ¥2,980(Mac 2台まで)。</span>
+      </div>
+    </div>
+    <div class="monitor">
+      <div class="screen">
+        <img class="cam on" id="cam-a" src="assets/alexa35.jpg" alt="ALEXA 35 の SDI モニタ出力(REC 中の OSD)">
+        <img class="cam" id="cam-b" src="assets/venice.jpg" alt="VENICE の SDI モニタ出力(REC 中の OSD)">
+      </div>
+      <div class="bar"><span id="cam-label">LIVE — ARRI ALEXA 35</span><span class="rec-tag"><span class="rec-dot"></span>AUTO REC (ROI)</span></div>
+    </div>
+  </div>
+
+  <section id="autorec">
+    <p class="eyebrow">Auto Rec</p>
+    <h2>収録ボタンは、押さなくていい。</h2>
+    <p class="sec-lead">カメラの REC に .Capture が追従します。経路や機種に合わせて三つの方式を選べるので、フラグが載らない現場でも取りこぼしません。</p>
+    <div class="feat-grid">
+      <div class="feat">
+        <span class="mono-tag">SDI Rec — VANC</span>
+        <h3>REC フラグ追従</h3>
+        <p>SDI の VANC に載るカメラの収録フラグを読んで開始・停止。VENICE などフラグ対応カメラで最も確実な方式です。</p>
+      </div>
+      <div class="feat">
+        <span class="mono-tag">ROI Rec — 視覚検知</span>
+        <h3>画面の REC 表示を見張る</h3>
+        <p>モニタ映像上の REC インジケータの色変化を検知。Find REC ● がワンクリックで位置と点灯色を自動登録し、現場 LUT で赤がずれていても追従します。ALEXA 35 / Mini / AMIRA / VENICE / BURANO / Ronin 4D のプリセット内蔵。</p>
+      </div>
+      <div class="feat">
+        <span class="mono-tag">Bridge — 無線</span>
+        <h3>離れた場所からトリガー</h3>
+        <p>USB 接続の Bridge 子機(M5Stack)が受けた REC 信号に追従。DIT ベースの収録開始を、オフラインの Mac まで無線で届けます。</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="premiere">
+    <p class="eyebrow">Premiere Pro</p>
+    <h2>止めた瞬間、ビンに入っている。</h2>
+    <p class="sec-lead">同梱の CEP パネル「.Capture Sync」が、確定したテイクをプロジェクト名のビンへ自動インポート。編集は次のカットを待つだけです。</p>
+    <div class="rows">
+      <div class="row"><dt>メタデータ引き継ぎ</dt><dd>Scene / Shot / Take、コメント、★レーティングをそのまま反映。★4 以上は Good にマーク、収録中に打った IN / OUT 点もクリップに付きます。</dd></div>
+      <div class="row"><dt>リネーム追従</dt><dd>収録後に Scene / Take や RH / HS を直すと、実ファイルも Premiere のリンクも自動で追従。<span class="mono">12_C003_T002RH.mov</span> のような命名を崩しません。</dd></div>
+      <div class="row"><dt>編集 SSD へ自動コピー</dt><dd>テイク確定後に別ボリュームへコピーし、Premiere にはコピー側を取り込ませる運用に対応。取り込みと編集のドライブを分けられます。</dd></div>
+      <div class="row"><dt>SDI OUT の受け渡し</dt><dd>入力は常に .Capture が保持したまま、SDI 出力だけ前面のアプリに追従。Premiere に切り替えれば Mercury Transmit がそのまま使え、収録は裏で回り続けます。メニューバーの赤い明滅で、どのアプリにいても収録状態を確認できます。</dd></div>
+    </div>
+  </section>
+
+  <section id="spec">
+    <p class="eyebrow">Spec</p>
+    <h2>仕様</h2>
+    <div class="rows">
+      <div class="row"><dt>収録形式</dt><dd><span class="mono">Apple ProRes 422 Proxy / LT / 422 / HQ / 4444 / 4444 XQ</span>(.mov、48kHz 2ch、タイムコードトラック付き)。テイクごとに H.264 (.mp4) と BWF (.wav) をバックグラウンドで同時生成できます。</dd></div>
+      <div class="row"><dt>対応デバイス</dt><dd>Blackmagic UltraStudio / DeckLink(Desktop Video が必要)、AJA io / KONA(AJA ドライバが必要)</dd></div>
+      <div class="row"><dt>フレームレート</dt><dd>23.976 / 24 / 25 / 29.97 / 50 / 59.94 ほか入力に追従。<span class="mono">23.976</span> は 24.00 に丸めず正確に記録します。</dd></div>
+      <div class="row"><dt>動作環境</dt><dd>macOS 14 以降、Apple Silicon。Developer ID 署名・Apple 公証済み、アプリ内アップデート(Sparkle)対応。</dd></div>
+      <div class="row"><dt>ライセンス</dt><dd>買い切り。1 ライセンスで Mac 2 台まで。オフライン環境でも失効しません(現場にネットが無いのは普通のことなので)。</dd></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="price-card">
+      <div>
+        <div class="amount">¥2,980<small>買い切り / Mac 2台</small></div>
+        <ul>
+          <li>Auto Rec 全方式・Premiere 連携・全 ProRes クラスを含むフル機能</li>
+          <li>アプリ内アップデートで新機能を継続提供</li>
+          <li>決済は Polar(クレジットカード)。ライセンスキーはメールで即時発行</li>
+        </ul>
+      </div>
+      <div class="price-actions">
+        <a class="btn primary" href="https://buy.polar.sh/polar_cl_YwmYX35zmzHUlACti9v7CDBJ6J4Dld9Oo8G0d4Nv9wT">ライセンスを購入</a>
+        <a class="btn" href="https://github.com/takikotetsu/cap-releases/releases/latest">DMG をダウンロード</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>© 2026 Kotetsu Inc.</span>
+    <span>
+      <a href="https://github.com/takikotetsu/cap-releases/releases/latest">ダウンロード</a> ·
+      <a href="https://github.com/takikotetsu/cap-releases/releases/latest/download/dotCapture_EULA.pdf">EULA</a> ·
+      <a href="https://github.com/takikotetsu/cap-releases/releases/latest/download/dotCapture_UserGuide_1.0.3.pdf">使い方ガイド</a>
+    </span>
+  </footer>
+</div>
+
+<script>
+  // ヒーローのカメラ切替(ALEXA 35 ⇄ VENICE)。Reduced Motion では固定。
+  (function () {
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    var a = document.getElementById("cam-a");
+    var b = document.getElementById("cam-b");
+    var label = document.getElementById("cam-label");
+    var showA = true;
+    setInterval(function () {
+      showA = !showA;
+      a.classList.toggle("on", showA);
+      b.classList.toggle("on", !showA);
+      label.textContent = showA ? "LIVE — ARRI ALEXA 35" : "LIVE — SONY VENICE";
+    }, 6000);
+  })();
+</script>
+
+</html>
