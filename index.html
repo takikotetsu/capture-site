@@ -166,6 +166,7 @@
     <nav>
       <a class="hide-sp" href="#autorec">Auto Rec</a>
       <a class="hide-sp" href="#premiere">Premiere</a>
+      <a class="hide-sp" href="#transmit">Transmit</a>
       <a class="hide-sp" href="#spec">仕様</a>
       <a class="btn primary" href="https://buy.polar.sh/polar_cl_YwmYX35zmzHUlACti9v7CDBJ6J4Dld9Oo8G0d4Nv9wT">購入 — ¥2,980</a>
     </nav>
@@ -222,6 +223,29 @@
       <div class="row"><dt>リネーム追従</dt><dd>収録後に Scene / Take や RH / HS を直すと、実ファイルも Premiere のリンクも自動で追従。<span class="mono">12_C003_T002RH.mov</span> のような命名を崩しません。</dd></div>
       <div class="row"><dt>編集 SSD へ自動コピー</dt><dd>テイク確定後に別ボリュームへコピーし、Premiere にはコピー側を取り込ませる運用に対応。取り込みと編集のドライブを分けられます。</dd></div>
       <div class="row"><dt>SDI OUT の受け渡し</dt><dd>入力は常に .Capture が保持したまま、SDI 出力だけ前面のアプリに追従。Premiere に切り替えれば Mercury Transmit がそのまま使え、収録は裏で回り続けます。メニューバーの赤い明滅で、どのアプリにいても収録状態を確認できます。</dd></div>
+    </div>
+  </section>
+
+  <section id="transmit">
+    <p class="eyebrow">.Capture Transmit — New in 1.3</p>
+    <h2>Premiere の絵も、.Capture から出す。</h2>
+    <p class="sec-lead">Premiere の出力先に「.Capture」を選ぶだけ。Premiere の絵と音が .Capture を通って SDI OUT に出るので、ヘッドホンと SDI が同時に鳴り、裏の収録も止まりません。AJA / Blackmagic 対応、プラグインは初回起動時にワンクリックで入ります。</p>
+    <div class="feat-grid">
+      <div class="feat">
+        <span class="mono-tag">Audio — SDI + Headphones</span>
+        <h3>SDI とヘッドホンを同時に</h3>
+        <p>Premiere 単体ではどちらか一方にしか出せなかった音を、SDI のモニタと Mac のヘッドホンに揃えて同時に出します。映像・ヘッドホン・SDI のタイミングも合わせてあります。</p>
+      </div>
+      <div class="feat">
+        <span class="mono-tag">Recording — Always on</span>
+        <h3>編集中も、収録は止まらない</h3>
+        <p>Premiere を操作している間も入力は .Capture が持ち続けるので、LIVE も Auto Rec も裏で動き続けます。AJA の機材を Premiere と受け渡す必要もなくなりました。</p>
+      </div>
+      <div class="feat">
+        <span class="mono-tag">SDI OUT — Last used</span>
+        <h3>最後に触った方を出す</h3>
+        <p>SDI OUT には .Capture と Premiere のうち最後に使った方の絵を出し続けます。ブラウザを触っても切り替わりません。9:16 の縦長シーケンスも左右黒で SDI に収めます。</p>
+      </div>
     </div>
   </section>
 
