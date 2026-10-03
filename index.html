@@ -3,6 +3,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>.Capture</title>
+<link rel="alternate" hreflang="ja" href="https://capture.kotetsu.work/">
+<link rel="alternate" hreflang="en" href="https://capture.kotetsu.work/en/">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=IBM+Plex+Sans+JP:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
   /* .Capture LP — 単一ダークテーマ(放送・現場機材の世界観に合わせて意図的に固定) */
@@ -158,6 +160,8 @@
     .price-card { grid-template-columns: 1fr; }
     nav .hide-sp { display: none; }
   }
+  .lang { color: var(--sub); font-size: 13px; }
+  .lang b { color: var(--text); font-weight: 500; }
 </style>
 
 <div class="wrap">
@@ -168,6 +172,7 @@
       <a class="hide-sp" href="#premiere">Premiere</a>
       <a class="hide-sp" href="#transmit">Transmit</a>
       <a class="hide-sp" href="#spec">仕様</a>
+      <span class="lang"><b>日本語</b> / <a href="/en/">EN</a></span>
       <a class="btn primary" href="https://buy.polar.sh/polar_cl_YwmYX35zmzHUlACti9v7CDBJ6J4Dld9Oo8G0d4Nv9wT">購入 — ¥2,980</a>
     </nav>
   </header>
@@ -197,14 +202,14 @@
     <p class="sec-lead">カメラの REC に .Capture が追従します。経路や機種に合わせて三つの方式を選べるので、フラグが載らない現場でも取りこぼしません。</p>
     <div class="feat-grid">
       <div class="feat">
-        <span class="mono-tag">SDI Rec — VANC</span>
+        <span class="mono-tag">SDI Rec — 収録フラグ</span>
         <h3>REC フラグ追従</h3>
-        <p>SDI の VANC に載るカメラの収録フラグを読んで開始・停止。VENICE などフラグ対応カメラで最も確実な方式です。</p>
+        <p>SDI に載るカメラの収録フラグを読んで開始・停止。ARRI や Sony VENICE などフラグ対応カメラで最も確実な方式です。AJA の機材(io 4K / io X3 / io XT)で使えます。</p>
       </div>
       <div class="feat">
         <span class="mono-tag">ROI Rec — 視覚検知</span>
         <h3>画面の REC 表示を見張る</h3>
-        <p>モニタ映像上の REC インジケータの色変化を検知。Find REC ● がワンクリックで位置と点灯色を自動登録し、現場 LUT で赤がずれていても追従します。ALEXA 35 / Mini / Mini LF / AMIRA / VENICE / VENICE 2 / FX6 / BURANO / Ronin 4D のプリセット内蔵。</p>
+        <p>モニタ映像上の REC インジケータの色変化を検知。Find REC ● がワンクリックで位置と点灯色を自動登録し、現場 LUT で赤がずれていても追従します。ALEXA 35 / Mini / Mini LF / AMIRA / VENICE / VENICE 2 / FX6 / BURANO / Ronin 4D のプリセット内蔵。Blackmagic を含むどの機材でも使えます。</p>
       </div>
       <div class="feat">
         <span class="mono-tag">Bridge — 無線</span>
@@ -283,7 +288,7 @@
     <span>
       <a href="https://github.com/takikotetsu/cap-releases/releases/latest">ダウンロード</a> ·
       <a href="https://github.com/takikotetsu/cap-releases/releases/latest/download/dotCapture_EULA.pdf">EULA</a> ·
-      <a href="https://github.com/takikotetsu/cap-releases/releases/latest/download/dotCapture_UserGuide_1.3.0.pdf">使い方ガイド</a>
+      <a href="https://github.com/takikotetsu/cap-releases/releases/latest/download/dotCapture_UserGuide_1.4.0.pdf">使い方ガイド</a>
     </span>
   </footer>
 </div>
