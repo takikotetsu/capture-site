@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>.Capture</title>
+<link rel="alternate" hreflang="ja" href="https://capture.kotetsu.work/">
+<link rel="alternate" hreflang="en" href="https://capture.kotetsu.work/en/">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=IBM+Plex+Sans:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  /* .Capture LP (English) — single dark theme, same as the Japanese page */
+  :root {
+    --bg: #0c0b09;
+    --panel: #161310;
+    --panel2: #1d1915;
+    --line: #2b241c;
+    --text: #ede6da;
+    --sub: #a2957f;
+    --accent: #ed7d1c;
+    --accent-dim: #b85e12;
+    --rec: #e5352b;
+    color-scheme: dark;
+  }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: "IBM Plex Sans", "Helvetica Neue", sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
+  }
+  .wrap { max-width: 1060px; margin: 0 auto; padding-inline: 24px; }
+  a { color: var(--accent); text-decoration: none; }
+  ::selection { background: var(--accent); color: #140b03; }
+
+  .en { font-family: Archivo, "IBM Plex Sans JP", sans-serif; }
+  .mono { font-family: "IBM Plex Mono", monospace; }
+
+  /* ---- ヘッダー ---- */
+  header {
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    padding-block: 22px;
+  }
+  .brand { display: flex; align-items: center; gap: 12px; }
+  .chip {
+    width: 40px; height: 40px; border-radius: 22.5%;
+    background: linear-gradient(160deg, #f28c2e, #d96a0e);
+    display: grid; place-items: center;
+    color: #fff; font-family: Archivo, sans-serif; font-weight: 800; font-size: 14px;
+    letter-spacing: -0.02em;
+  }
+  .brand b { font-family: Archivo, sans-serif; font-weight: 700; font-size: 19px; letter-spacing: 0.01em; }
+  nav { display: flex; gap: 22px; align-items: center; font-size: 14px; }
+  nav a { color: var(--sub); }
+  nav a:hover { color: var(--text); }
+  .btn {
+    display: inline-block; padding: 10px 22px; border-radius: 8px;
+    font-weight: 700; font-size: 15px; line-height: 1.6;
+    border: 1px solid var(--line); color: var(--text);
+  }
+  .btn:hover { border-color: var(--sub); }
+  .btn.primary {
+    background: var(--accent); border-color: var(--accent); color: #170c02;
+  }
+  .btn.primary:hover { background: #f68f31; }
+
+  /* ---- ヒーロー ---- */
+  .hero {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center;
+    padding-block: 56px 72px;
+  }
+  .hero h1 {
+    font-size: clamp(30px, 4.2vw, 44px); line-height: 1.35; margin: 0 0 18px;
+    font-weight: 700; letter-spacing: 0.01em; text-wrap: balance;
+  }
+  .hero h1 .en { color: var(--accent); }
+  .hero p.lead { color: var(--sub); margin: 0 0 30px; font-size: 16.5px; max-width: 34em; }
+  .cta { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
+  .cta .note { width: 100%; color: var(--sub); font-size: 13px; margin-top: 2px; }
+
+  /* ---- モニタ・モックアップ ---- */
+  .monitor {
+    background: #000; border: 1px solid var(--line); border-radius: 10px;
+    padding: 10px; box-shadow: 0 30px 80px rgba(0,0,0,0.55);
+  }
+  .screen {
+    /* Cam_OSD 素材(3248×1928)の比率のまま、OSD の外枠まで見せる */
+    aspect-ratio: 3248 / 1928; max-width: 100%; border-radius: 4px; position: relative; overflow: hidden;
+    background: #000;
+  }
+  .screen img.cam {
+    position: absolute; inset: 0; width: 100%; height: 100%; display: block;
+    opacity: 0; transition: opacity 1.1s ease;
+  }
+  .screen img.cam.on { opacity: 1; }
+  .monitor .bar .rec-dot {
+    display: inline-block; width: 8px; height: 8px; border-radius: 50%;
+    background: var(--rec); margin-right: 6px; vertical-align: 1px;
+    animation: blink 1s steps(1) infinite;
+  }
+  @keyframes blink { 50% { opacity: 0.15; } }
+  @media (prefers-reduced-motion: reduce) { .monitor .bar .rec-dot { animation: none; } }
+  .monitor .bar {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 9px 6px 2px; font-family: "IBM Plex Mono", monospace; font-size: 11px; color: var(--sub);
+  }
+  .monitor .bar .rec-tag { color: var(--rec); font-weight: 500; }
+
+  /* ---- セクション共通 ---- */
+  section { border-top: 1px solid var(--line); padding-block: 64px; }
+  .eyebrow {
+    font-family: "IBM Plex Mono", monospace; font-size: 12.5px; letter-spacing: 0.14em;
+    color: var(--accent); text-transform: uppercase; margin: 0 0 10px;
+  }
+  h2 { font-size: clamp(23px, 3vw, 30px); line-height: 1.45; margin: 0 0 14px; font-weight: 700; text-wrap: balance; }
+  .sec-lead { color: var(--sub); max-width: 40em; margin: 0 0 36px; }
+
+  .feat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .feat {
+    background: var(--panel); border: 1px solid var(--line); border-radius: 10px;
+    padding: 22px 22px 18px;
+  }
+  .feat .mono-tag { font-family: "IBM Plex Mono", monospace; font-size: 12px; color: var(--accent); display: block; margin-bottom: 10px; }
+  .feat h3 { margin: 0 0 8px; font-size: 17px; font-weight: 700; }
+  .feat p { margin: 0; color: var(--sub); font-size: 14px; line-height: 1.8; }
+
+  .rows { display: grid; gap: 0; }
+  .row {
+    display: grid; grid-template-columns: 220px 1fr; gap: 24px;
+    padding-block: 20px; border-top: 1px solid var(--line);
+  }
+  .row:first-child { border-top: none; }
+  .row dt { font-weight: 700; font-size: 15.5px; }
+  .row dd { margin: 0; color: var(--sub); font-size: 14.5px; }
+  .row dd .mono { color: var(--text); font-size: 13px; }
+
+  /* ---- 価格 ---- */
+  .price-card {
+    display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: center;
+    background: linear-gradient(150deg, var(--panel2), var(--panel));
+    border: 1px solid var(--line); border-radius: 12px; padding: 34px 36px;
+  }
+  .price-card .amount { font-family: Archivo, sans-serif; font-weight: 800; font-size: 44px; line-height: 1.2; }
+  .price-card .amount small { font-size: 16px; font-weight: 500; color: var(--sub); margin-left: 8px; }
+  .price-card ul { margin: 14px 0 0; padding: 0; list-style: none; color: var(--sub); font-size: 14px; display: grid; gap: 4px; }
+  .price-card ul li::before { content: "— "; color: var(--accent); }
+  .price-actions { display: grid; gap: 10px; justify-items: stretch; text-align: center; }
+
+  footer {
+    border-top: 1px solid var(--line); padding-block: 34px 46px;
+    display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+    color: var(--sub); font-size: 13px;
+  }
+  footer a { color: var(--sub); }
+  footer a:hover { color: var(--text); }
+
+  @media (max-width: 800px) {
+    .hero { grid-template-columns: 1fr; gap: 36px; padding-block: 32px 52px; }
+    .feat-grid { grid-template-columns: 1fr; }
+    .row { grid-template-columns: 1fr; gap: 4px; padding-block: 16px; }
+    .price-card { grid-template-columns: 1fr; }
+    nav .hide-sp { display: none; }
+  }
+  .lang { color: var(--sub); font-size: 13px; }
+  .lang b { color: var(--text); font-weight: 500; }
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="brand"><span class="chip">.Cap</span><b>.Capture</b></div>
+    <nav>
+      <a class="hide-sp" href="#autorec">Auto Rec</a>
+      <a class="hide-sp" href="#premiere">Premiere</a>
+      <a class="hide-sp" href="#transmit">Transmit</a>
+      <a class="hide-sp" href="#spec">Specs</a>
+      <span class="lang"><a href="/">日本語</a> / <b>EN</b></span>
+      <a class="btn primary" href="https://buy.polar.sh/polar_cl_YwmYX35zmzHUlACti9v7CDBJ6J4Dld9Oo8G0d4Nv9wT">Buy — $20</a>
+    </nav>
+  </header>
+
+  <div class="hero">
+    <div>
+      <h1>When the camera rolls,<br><span class="en">.Capture</span> rolls.</h1>
+      <p class="lead">SDI capture and ingest at the speed of the set. .Capture follows the camera's REC three ways — the record flag on SDI, the REC indicator on the monitor picture, and a wireless trigger — and every take lands straight in a Premiere Pro bin. Built as a replacement for Media Express, for editors working on set. macOS app.</p>
+      <div class="cta">
+        <a class="btn primary" href="https://buy.polar.sh/polar_cl_YwmYX35zmzHUlACti9v7CDBJ6J4Dld9Oo8G0d4Nv9wT">Buy a license</a>
+        <a class="btn" href="https://github.com/takikotetsu/cap-releases/releases/latest">Download the DMG</a>
+        <span class="note">macOS 14 or later / Apple Silicon. Notarized. One-time purchase, $20 (up to 2 Macs).</span>
+      </div>
+    </div>
+    <div class="monitor">
+      <div class="screen">
+        <img class="cam on" id="cam-a" src="../assets/alexa35.jpg" alt="ALEXA 35 SDI monitor output (OSD while recording)">
+        <img class="cam" id="cam-b" src="../assets/venice.jpg" alt="VENICE SDI monitor output (OSD while recording)">
+      </div>
+      <div class="bar"><span id="cam-label">LIVE — ARRI ALEXA 35</span><span class="rec-tag"><span class="rec-dot"></span>AUTO REC (ROI)</span></div>
+    </div>
+  </div>
+
+  <section id="autorec">
+    <p class="eyebrow">Auto Rec</p>
+    <h2>You don't have to press record.</h2>
+    <p class="sec-lead">.Capture follows the camera's REC. Pick the method that fits your signal path and camera, so you don't miss takes even when the record flag isn't available.</p>
+    <div class="feat-grid">
+      <div class="feat">
+        <span class="mono-tag">SDI Rec — Record flag</span>
+        <h3>Follow the camera's record flag</h3>
+        <p>Reads the record flag the camera embeds in SDI and starts and stops with it. The most reliable method with cameras that send it, such as ARRI and Sony VENICE. Works with AJA devices (io 4K, io X3, io XT).</p>
+      </div>
+      <div class="feat">
+        <span class="mono-tag">ROI Rec — Visual detection</span>
+        <h3>Watch the REC indicator on screen</h3>
+        <p>Detects the color change of the REC indicator in the monitor picture. Find REC ● registers its position and lit color in one click, and keeps tracking even when an on-set LUT shifts the red. Presets for ALEXA 35 / Mini / Mini LF / AMIRA / VENICE / VENICE 2 / FX6 / BURANO / Ronin 4D. Works with any device, including Blackmagic.</p>
+      </div>
+      <div class="feat">
+        <span class="mono-tag">Bridge — Wireless</span>
+        <h3>Trigger from across the set</h3>
+        <p>Follows the REC signal received by a USB-connected Bridge receiver (M5Stack). Carries the DIT's record start all the way to an offline Mac, wirelessly.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="premiere">
+    <p class="eyebrow">Premiere Pro</p>
+    <h2>Stop recording, and it's already in the bin.</h2>
+    <p class="sec-lead">The included CEP panel ".Capture Sync" imports every finished take into a bin named after your project. The editor just waits for the next cut.</p>
+    <div class="rows">
+      <div class="row"><dt>Metadata carried over</dt><dd>Scene / Shot / Take, comments and star ratings come across as they are. Four stars or more are marked Good, and IN / OUT points set during recording are applied to the clip.</dd></div>
+      <div class="row"><dt>Renames follow</dt><dd>Fix the Scene / Take or the RH / HS tag after recording, and both the file and Premiere's link follow automatically. Names like <span class="mono">12_C003_T002RH.mov</span> stay intact.</dd></div>
+      <div class="row"><dt>Auto copy to the edit SSD</dt><dd>After each take, copy it to another volume and have Premiere import the copy. Keep the capture drive and the edit drive separate.</dd></div>
+      <div class="row"><dt>SDI OUT handover</dt><dd>When Premiere outputs directly to your device, .Capture keeps the input and hands only the SDI output to Premiere while it is in front, so Mercury Transmit works and recording keeps running. A red blink in the menu bar shows the recording state from any app.</dd></div>
+    </div>
+  </section>
+
+  <section id="transmit">
+    <p class="eyebrow">.Capture Transmit — New in 1.3</p>
+    <h2>Send Premiere's picture out through .Capture.</h2>
+    <p class="sec-lead">Choose ".Capture" as Premiere's output device. Premiere's picture and sound go out of SDI OUT through .Capture, so headphones and SDI play together, and recording never stops. Works with AJA and Blackmagic. The plugin installs from the first-launch prompt in one click (your Mac password is asked once).</p>
+    <div class="feat-grid">
+      <div class="feat">
+        <span class="mono-tag">Audio — SDI + Headphones</span>
+        <h3>SDI and headphones at once</h3>
+        <p>Premiere alone sends sound to only one of them. .Capture plays it on the SDI monitor and your Mac's headphones at the same time, with picture, headphones and SDI lined up.</p>
+      </div>
+      <div class="feat">
+        <span class="mono-tag">Recording — Always on</span>
+        <h3>Keeps recording while you edit</h3>
+        <p>.Capture holds the input the whole time you work in Premiere, so LIVE and Auto Rec keep running in the background. No more handing an AJA device back and forth with Premiere.</p>
+      </div>
+      <div class="feat">
+        <span class="mono-tag">SDI OUT — Last used</span>
+        <h3>Shows whichever you used last</h3>
+        <p>SDI OUT keeps showing .Capture or Premiere, whichever was in front last. Clicking your browser doesn't switch it. 9:16 vertical sequences fit into SDI with black sides.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="spec">
+    <p class="eyebrow">Specs</p>
+    <h2>Specifications</h2>
+    <div class="rows">
+      <div class="row"><dt>Recording formats</dt><dd><span class="mono">Apple ProRes 422 Proxy / LT / 422 / HQ / 4444 / 4444 XQ</span> (.mov, 48 kHz 2 ch, with a timecode track). H.264 (.mp4) and BWF (.wav) can be generated in the background for every take.</dd></div>
+      <div class="row"><dt>Devices</dt><dd>Blackmagic UltraStudio / DeckLink (Desktop Video required), AJA io / KONA (AJA driver required), NDI sources on the network</dd></div>
+      <div class="row"><dt>Frame rates</dt><dd>Follows the input: 23.976 / 24 / 25 / 29.97 / 50 / 59.94 and more. <span class="mono">23.976</span> is recorded exactly, not rounded to 24.00.</dd></div>
+      <div class="row"><dt>Language</dt><dd>English / Japanese (follows the system, or choose in Settings).</dd></div>
+      <div class="row"><dt>Requirements</dt><dd>macOS 14 or later, Apple Silicon. Developer ID signed and notarized by Apple. In-app updates (Sparkle).</dd></div>
+      <div class="row"><dt>License</dt><dd>One-time purchase. One license covers up to 2 Macs. It never expires offline — no internet on set is normal.</dd></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="price-card">
+      <div>
+        <div class="amount">$20<small>one-time / 2 Macs</small></div>
+        <ul>
+          <li>Full features: every Auto Rec method, Premiere integration, all ProRes classes</li>
+          <li>New features keep coming through in-app updates</li>
+          <li>Pay with Polar (credit card). Your license key arrives by email right away</li>
+        </ul>
+      </div>
+      <div class="price-actions">
+        <a class="btn primary" href="https://buy.polar.sh/polar_cl_YwmYX35zmzHUlACti9v7CDBJ6J4Dld9Oo8G0d4Nv9wT">Buy a license</a>
+        <a class="btn" href="https://github.com/takikotetsu/cap-releases/releases/latest">Download the DMG</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>NDI® is a registered trademark of Vizrt NDI AB. · © 2026 Kotetsu Inc.</span>
+    <span>
+      <a href="https://github.com/takikotetsu/cap-releases/releases/latest">Download</a> ·
+      <a href="https://github.com/takikotetsu/cap-releases/releases/latest/download/dotCapture_EULA.pdf">EULA</a> ·
+      <a href="/">日本語</a>
+    </span>
+  </footer>
+</div>
+
+<script>
+  // ヒーローのカメラ切替(ALEXA 35 ⇄ VENICE)。Reduced Motion では固定。
+  (function () {
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    var a = document.getElementById("cam-a");
+    var b = document.getElementById("cam-b");
+    var label = document.getElementById("cam-label");
+    var showA = true;
+    setInterval(function () {
+      showA = !showA;
+      a.classList.toggle("on", showA);
+      b.classList.toggle("on", !showA);
+      label.textContent = showA ? "LIVE — ARRI ALEXA 35" : "LIVE — SONY VENICE";
+    }, 6000);
+  })();
+</script>
+
+</html>
