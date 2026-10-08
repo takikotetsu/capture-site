@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>.Cast — サポート / Support</title>
+<meta name="description" content=".Cast は iPhone の画面と音を Mac の .Capture へ送る送信専用アプリです。">
+<style>
+:root{--bg:#fff;--fg:#141414;--dim:#6b6b6b;--line:rgba(0,0,0,.12);--card:#f5f5f5;--accent:#e0242b}
+@media (prefers-color-scheme:dark){:root{--bg:#000;--fg:#f2f2f2;--dim:#9a9a9a;--line:rgba(255,255,255,.14);--card:#111;--accent:#ff4a4f}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.8 -apple-system,BlinkMacSystemFont,"Hiragino Sans","Hiragino Kaku Gothic ProN","Helvetica Neue",sans-serif;-webkit-text-size-adjust:100%}
+a{color:inherit}
+.wrap{max-width:760px;margin:0 auto;padding:0 16px}
+header{border-bottom:1px solid var(--line)}
+header .wrap{display:flex;align-items:center;justify-content:space-between;height:56px}
+.wm{font-weight:700;font-size:18px;text-decoration:none;letter-spacing:.02em}
+.wm i{font-style:normal;color:var(--accent)}
+nav a{font-size:14px;color:var(--dim);text-decoration:none;margin-left:16px}
+main{padding:48px 0 64px}
+h1{font-size:30px;margin:0 0 4px;line-height:1.3}
+.lead{color:var(--dim);margin:0 0 8px}
+h2{font-size:20px;margin:48px 0 12px;padding-top:24px;border-top:1px solid var(--line)}
+h3{font-size:16px;margin:24px 0 4px}
+.en{color:var(--dim);font-size:14px;line-height:1.7;margin-top:2px}
+ol.steps{padding-left:0;list-style:none;counter-reset:s}
+ol.steps li{counter-increment:s;position:relative;padding:12px 14px 12px 52px;background:var(--card);border-radius:10px;margin:8px 0}
+ol.steps li::before{content:counter(s);position:absolute;left:14px;top:12px;width:26px;height:26px;border-radius:50%;background:var(--accent);color:#fff;font-weight:700;font-size:14px;line-height:26px;text-align:center}
+.note{background:var(--card);border-radius:10px;padding:12px 14px;font-size:15px}
+footer{color:var(--dim);font-size:13px;padding:24px 0 48px;border-top:1px solid var(--line)}
+code{font-family:ui-monospace,Menlo,monospace;font-size:.92em}
+</style>
+</head>
+<body>
+<header><div class="wrap"><a class="wm" href="./"><i>.</i>Cast</a><nav><a href="../">.Capture</a><a href="privacy.html">Privacy</a></nav></div></header>
+<main class="wrap">
+
+<h1>.Cast</h1>
+<p class="lead">iPhone の画面と音を、Mac の .Capture へ。</p>
+<p>.Cast は、iPhone の画面（カメラアプリのモニタリング画面を UI ごと）と音を、同じ Wi‑Fi 上の Mac で動く <a href="https://capture.kotetsu.work">.Capture</a> に送る送信専用アプリです。.Capture ではほかのカメラと同じ入力として、プレビュー・収録・SDI 出力ができます。インターネット、アカウント、課金はありません。</p>
+<p class="en">.Cast sends your iPhone's screen — the camera app's monitoring view, UI and all — and audio to <a href="https://capture.kotetsu.work">.Capture</a> on a Mac on the same Wi‑Fi. In .Capture it is an input like any other camera: preview, record, output to SDI. No internet, no account, no purchases.</p>
+
+<h2>使い方 <span class="en">How to use</span></h2>
+<ol class="steps">
+<li><b>.Capture を最新版にして起動</b><div class="en">Update .Capture on your Mac to the latest version and launch it.</div></li>
+<li><b>iPhone と Mac を同じ Wi‑Fi につなぐ</b><div class="en">Join the iPhone and the Mac to the same Wi‑Fi network.</div></li>
+<li><b>.Cast で REC を押し、「ブロードキャストを開始」</b><br>音も送るなら、そのときマイクをオンに。開始したら撮影に使うカメラアプリを開きます。<div class="en">In .Cast, tap REC and then Start Broadcast (turn the microphone on if you want sound). Then open your camera app.</div></li>
+<li><b>.Capture の INPUT で iPhone を選ぶ</b><br>「iPhone · 端末名」が入力に出ます。複数台なら「iPhone マルチ」で最大 4 台を並べられます。<div class="en">In .Capture, choose "iPhone · device name" under INPUT. With several phones, "iPhone Multi" shows up to four.</div></li>
+</ol>
+<p>止めるときは、.Cast の停止ボタンか、iPhone の画面上部の赤い表示から。<span class="en">To stop, tap the stop button in .Cast or the red indicator at the top of the screen.</span></p>
+
+<h2>よくある質問 <span class="en">FAQ</span></h2>
+
+<h3>.Capture が見つからない</h3>
+<p>iPhone の 設定 → プライバシーとセキュリティ → ローカルネットワーク で .Cast をオンにしてください。iPhone と Mac が同じ Wi‑Fi にいること、Mac で .Capture が起動していることも確認してください。ゲスト用や会社の Wi‑Fi では、端末どうしの通信が止められていることがあります。その場合はモバイルルーターや Mac のインターネット共有など、別のネットワークを使ってください。</p>
+<p class="en"><b>.Capture is not found.</b> On the iPhone, go to Settings → Privacy &amp; Security → Local Network and turn on .Cast. Make sure both devices are on the same Wi‑Fi and .Capture is running. Guest or corporate Wi‑Fi often blocks device-to-device traffic; use a separate router or hotspot instead.</p>
+
+<h3>通知が映ってしまう</h3>
+<p>.Cast は画面全体を送るので、通知もそのまま映ります。配信中は集中モード（おやすみモードなど）をオンにしてください。</p>
+<p class="en"><b>Notifications show up.</b> The whole screen is sent, notifications included. Turn on a Focus mode (e.g. Do Not Disturb) while broadcasting.</p>
+
+<h3>向きがおかしい</h3>
+<p>.Cast の「向き」で 自動 / 横（端子が右）/ 横（端子が左）/ 縦 を選べます。リグに固定して使うなら、自動より決め打ちが確実です。配信中に変えても反映されます。</p>
+<p class="en"><b>The picture is rotated.</b> Choose Auto / Landscape (port on the right) / Landscape (port on the left) / Portrait under Orientation in .Cast. On a rig, a fixed setting is more reliable than Auto. It can be changed while broadcasting.</p>
+
+<h3>どのくらい遅れる？</h3>
+<p>Wi‑Fi の状態によりますが、目安は数フレームから 0.3 秒ほどです。電波が混んでいる場所では遅れやコマ落ちが増えます。Mac は有線 LAN、iPhone はルーターの近くに置くと安定します。.Cast はモニタリング用で、iPhone 本体の収録の代わりにはなりません。</p>
+<p class="en"><b>How much delay?</b> Typically a few frames to about 0.3 s, depending on the Wi‑Fi. Crowded Wi‑Fi adds delay and dropped frames; a wired Mac and an iPhone close to the router help. .Cast is for monitoring and does not replace recording on the iPhone itself.</p>
+
+<h3>音が出ない</h3>
+<p>配信を始めるときのシステムの画面で、マイクのボタンをオンにしてから開始してください。うまくいかないときは一度止めて、マイクをオンにして始め直します。マイクがオフのときは、アプリの音だけが送られます。</p>
+<p class="en"><b>No sound.</b> Turn on the microphone button in the system sheet before starting the broadcast. If needed, stop and start again with the microphone on. With the microphone off, only app audio is sent.</p>
+
+<h3>何が必要？</h3>
+<p>iOS 17 以降の iPhone と、Mac 用の <a href="https://capture.kotetsu.work">.Capture</a>（iPhone 入力に対応した最新版）。インターネット接続やアカウントは要りません。</p>
+<p class="en"><b>Requirements.</b> An iPhone with iOS 17 or later and <a href="https://capture.kotetsu.work">.Capture</a> for Mac (latest version). No internet connection or account needed.</p>
+
+<h2>お問い合わせ <span class="en">Contact</span></h2>
+<p class="note">KOTETSU, Corp.<br><a href="mailto:taki@kotetsu.work">taki@kotetsu.work</a><br><span class="en">iPhone の機種・iOS の版・.Capture の版を書いていただけると早く調べられます。<br>Please include your iPhone model, iOS version and .Capture version.</span></p>
+
+</main>
+<footer><div class="wrap">© 2026 KOTETSU, Corp. · <a href="privacy.html">プライバシーポリシー / Privacy Policy</a></div></footer>
+</body>
+</html>
